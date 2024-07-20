@@ -1,0 +1,35 @@
+{
+	"name": "new-products-api",
+	"type": "module",
+	"version": "1.0.0",
+	"private": true,
+	"engines": {
+		"node": "20.10.0",
+		"npm": "10.2.3"
+	},
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"cf-typegen": "wrangler types",
+		"format": "prettier --write './**/*'",
+		"lint": "eslint \"./**/*\"",
+		"lint:fix": "npm run lint -- --fix && npm run format"
+	},
+	"dependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.4.5",
+		"@cloudflare/workers-types": "^4.20240620.0",
+		"@google-analytics/data": "^4.7.0",
+		"wrangler": "^3.60.3",
+		"typescript": "^5.4.5"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^7.2.0",
+		"@typescript-eslint/parser": "^7.2.0",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-react-refresh": "^0.4.6",
+		"prettier": "^3.3.3",
+		"prettier-plugin-sh": "^0.14.0"
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"name": "New Products API",
+			"path": "."
+		}
+	],
+	"settings": {
+		"npm.packageManager": "npm",
+		"eslint.workingDirectories": ["./"],
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"files.readonlyInclude": {
+			"node_modules/**/*": true,
+			".git/**/*": true,
+			"dist/**/*": true,
+			"src/router.ts": true
+		}
+	},
+	"extensions": {
+		"recommendations": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "EditorConfig.EditorConfig"]
+	}
+}

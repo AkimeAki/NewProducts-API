@@ -1,0 +1,16 @@
+module.exports = {
+	singleQuote: false,
+	jsxSingleQuote: false,
+	printWidth: 120,
+	semi: true,
+	trailingComma: "none",
+	plugins: ["prettier-plugin-sh"],
+	overrides: [
+		{
+			files: "*.code-workspace",
+			options: {
+				parser: "json"
+			}
+		}
+	]
+};

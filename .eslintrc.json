@@ -1,0 +1,11 @@
+{
+	"root": true,
+	"env": { "browser": true, "es2020": true },
+	"extends": ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended", "prettier"],
+	"ignorePatterns": ["dist"],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["react-refresh"],
+	"rules": {
+		"react-hooks/exhaustive-deps": "off"
+	}
+}
