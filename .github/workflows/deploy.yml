@@ -10,7 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - uses: actions/checkout@v3
+      - uses: Checkout
+        name: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+          cache: npm
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
