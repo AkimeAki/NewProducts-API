@@ -16,7 +16,7 @@ jobs:
         with:
           node-version-file: "package.json"
           cache: npm
-      - run: npm ci --omit=dev
+      - run: npm ci --omit=dev && npm run db:init:prod
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
