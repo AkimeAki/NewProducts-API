@@ -16,6 +16,7 @@ jobs:
         with:
           node-version-file: "package.json"
           cache: npm
+      - run: npm ci && npx prisma generate
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
