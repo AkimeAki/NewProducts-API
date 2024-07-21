@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import { Kysely, PostgresDialect } from "kysely";
 import { Hono } from "hono";
-import { Database } from "./types";
+import {DB} from "kysely-codegen"
 
 type Bindings = {
 	DATABASE_URL: string;
@@ -17,7 +17,7 @@ app.get("/", async (c) => {
 		pool
 	});
 
-	const db = new Kysely<Database>({
+	const db = new Kysely<DB>({
 		dialect,
 		log: (event) => {
 			if (event.level === "query") {
