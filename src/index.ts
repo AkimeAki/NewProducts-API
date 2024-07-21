@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import { Kysely, PostgresDialect } from "kysely";
 import { Hono } from "hono";
+import { Database } from "./types";
 
 type Bindings = {
 	DATABASE_URL: string;
@@ -13,14 +13,21 @@ app.get("/", async (c) => {
 	const connectionString = `${c.env.DATABASE_URL}`;
 
 	const pool = new Pool({ connectionString });
-	const adapter = new PrismaPg(pool);
-	const prisma = new PrismaClient({ adapter });
+	const dialect = new PostgresDialect({
+		pool
+	});
 
-	const result = await prisma.user.findMany({
-		select: {
-			id: true
+	const db = new Kysely<Database>({
+		dialect,
+		log: (event) => {
+			if (event.level === "query") {
+				console.log(event.query.sql);
+				console.log(event.query.parameters);
+			}
 		}
 	});
+
+	const result = await db.selectFrom("users").selectAll().execute();
 
 	return c.text("Hello Hono!" + JSON.stringify(result));
 });

@@ -8,7 +8,7 @@
 		"npm": "10.2.3"
 	},
 	"scripts": {
-		"dev": "wrangler dev src/index.ts",
+		"dev": "dotenv -e .env.development -- wrangler dev src/index.ts",
 		"deploy": "wrangler deploy --minify src/index.ts",
 		"cf-typegen": "wrangler types",
 		"format": "prettier --write './**/*'",
@@ -19,15 +19,12 @@
 		"prisma:migrate": "dotenv -e .env.development -- prisma migrate dev"
 	},
 	"dependencies": {
-		"@planetscale/database": "^1.18.0",
-		"@prisma/adapter-pg": "^5.17.0",
-		"@prisma/client": "^5.17.0",
+		"@cloudflare/workers-types": "^4.20240529.0",
 		"@types/pg": "^8.11.6",
 		"dotenv-cli": "^7.4.2",
 		"hono": "^4.5.0",
+		"kysely": "^0.27.4",
 		"pg": "^8.12.0",
-		"prisma": "^5.17.0",
-		"@cloudflare/workers-types": "^4.20240529.0",
 		"wrangler": "^3.57.2"
 	},
 	"devDependencies": {
