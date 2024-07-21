@@ -8,21 +8,24 @@
 		"npm": "10.2.3"
 	},
 	"scripts": {
-		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
+		"dev": "wrangler dev src/index.ts",
+		"deploy": "wrangler deploy --minify src/index.ts",
 		"cf-typegen": "wrangler types",
 		"format": "prettier --write './**/*'",
 		"lint": "eslint \"./**/*\"",
-		"lint:fix": "npm run lint -- --fix && npm run format"
+		"lint:fix": "npm run lint -- --fix && npm run format",
+		"prisma:deploy:dev": "dotenv -e .env.development -- prisma migrate deploy",
+		"prisma:deploy:prod": "dotenv -e .env.production -- prisma migrate deploy",
+		"prisma:migrate": "dotenv -e .env.development -- prisma migrate dev"
 	},
 	"dependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.4.5",
-		"@cloudflare/workers-types": "^4.20240620.0",
-		"@google-analytics/data": "^4.7.0",
-		"wrangler": "^3.60.3",
-		"typescript": "^5.4.5"
+		"@prisma/client": "^5.17.0",
+		"dotenv-cli": "^7.4.2",
+		"hono": "^4.5.0",
+		"prisma": "^5.17.0"
 	},
 	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20240529.0",
 		"@typescript-eslint/eslint-plugin": "^7.2.0",
 		"@typescript-eslint/parser": "^7.2.0",
 		"eslint": "^8.57.0",
@@ -30,6 +33,7 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.6",
 		"prettier": "^3.3.3",
-		"prettier-plugin-sh": "^0.14.0"
+		"prettier-plugin-sh": "^0.14.0",
+		"wrangler": "^3.57.2"
 	}
 }

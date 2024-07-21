@@ -10,6 +10,10 @@
 		"eslint.workingDirectories": ["./"],
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"[prisma]": {
+			"editor.formatOnSave": true,
+			"editor.defaultFormatter": "Prisma.prisma"
+		},
 		"files.readonlyInclude": {
 			"node_modules/**/*": true,
 			".git/**/*": true,
