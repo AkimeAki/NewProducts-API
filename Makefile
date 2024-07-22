@@ -7,6 +7,8 @@ init:
 	@make delete
 	docker compose build --no-cache
 	docker compose up -d
+	docker compose exec -it app npm ci
+	docker compose exec -it app npm run db:deploy
 
 .PHONY: コンテナ削除
 delete:

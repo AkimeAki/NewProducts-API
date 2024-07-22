@@ -1,17 +1,14 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "users" (
+    "id" STRING NOT NULL,
+    "name" STRING NOT NULL,
 
-  - Added the required column `channel_id` to the `users` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `name` to the `users` table without a default value. This is not possible if the table is not empty.
-
-*/
--- AlterTable
-ALTER TABLE "users" ADD COLUMN     "channel_id" STRING NOT NULL;
-ALTER TABLE "users" ADD COLUMN     "name" STRING NOT NULL;
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "channels" (
-    "id" STRING NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" STRING NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,7 +18,7 @@ CREATE TABLE "channels" (
 
 -- CreateTable
 CREATE TABLE "channel_users" (
-    "channel_id" STRING NOT NULL,
+    "channel_id" UUID NOT NULL,
     "user_id" STRING NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -31,20 +28,20 @@ CREATE TABLE "channel_users" (
 
 -- CreateTable
 CREATE TABLE "products" (
-    "id" STRING NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" STRING NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "channel_id" STRING NOT NULL,
+    "channel_id" UUID NOT NULL,
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "messages" (
-    "id" STRING NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "user_id" STRING NOT NULL,
-    "product_id" STRING NOT NULL,
+    "product_id" UUID NOT NULL,
     "text" STRING NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

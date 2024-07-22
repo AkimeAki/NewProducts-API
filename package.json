@@ -8,17 +8,15 @@
 		"npm": "10.2.3"
 	},
 	"scripts": {
-		"dev": "dotenv -e .env.development -- wrangler dev src/index.ts",
+		"dev": "wrangler dev src/index.ts",
 		"deploy": "wrangler deploy --minify src/index.ts",
 		"cf-typegen": "wrangler types",
 		"format": "prettier --write './**/*'",
 		"lint": "eslint \"./**/*\"",
 		"lint:fix": "npm run lint -- --fix && npm run format",
-		"db:init:dev": "dotenv -e .env.development -- kysely-codegen",
-		"db:init:prod": "dotenv -e .env.production -- kysely-codegen",
-		"db:deploy:dev": "dotenv -e .env.development -- prisma migrate deploy",
-		"db:deploy:prod": "dotenv -e .env.production -- prisma migrate deploy",
-		"db:migrate": "dotenv -e .env.development -- prisma migrate dev"
+		"db:generate": "dotenv -e .dev.vars -- prisma generate",
+		"db:deploy": "dotenv -e .dev.vars -- prisma migrate deploy",
+		"db:migrate": "dotenv -e .dev.vars -- prisma migrate dev"
 	},
 	"dependencies": {
 		"@cloudflare/workers-types": "^4.20240529.0",
@@ -27,9 +25,10 @@
 		"dotenv-cli": "^7.4.2",
 		"hono": "^4.5.0",
 		"kysely": "^0.27.4",
-		"kysely-codegen": "^0.15.0",
+		"prisma-kysely": "^1.8.0",
 		"pg": "^8.12.0",
-		"wrangler": "^3.57.2"
+		"wrangler": "^3.57.2",
+		"prisma": "^5.17.0"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -40,6 +39,6 @@
 		"eslint-plugin-react-refresh": "^0.4.6",
 		"prettier": "^3.3.3",
 		"prettier-plugin-sh": "^0.14.0",
-		"prisma": "^5.17.0"
+		"prettier-plugin-toml": "^2.0.1"
 	}
 }

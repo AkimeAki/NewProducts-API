@@ -1,6 +1,8 @@
-generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["driverAdapters"]
+generator kysely {
+    provider     = "prisma-kysely"
+    output       = "../src/db"
+    fileName     = "types.ts"
+    enumFileName = "enums.ts"
 }
 
 datasource db {
@@ -9,9 +11,8 @@ datasource db {
 }
 
 model User {
-    id         String @id
-    name       String
-    channel_id String
+    id   String @id
+    name String
 
     channel_user ChannelUser[]
     message      Message[]
@@ -20,7 +21,7 @@ model User {
 }
 
 model Channel {
-    id           String        @id @default(cuid())
+    id           String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     name         String
     created_at   DateTime      @default(now())
     updated_at   DateTime      @default(now()) @updatedAt
@@ -31,7 +32,7 @@ model Channel {
 }
 
 model ChannelUser {
-    channel_id String
+    channel_id String   @db.Uuid
     user_id    String
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
@@ -44,11 +45,11 @@ model ChannelUser {
 }
 
 model Product {
-    id         String   @id @default(cuid())
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     name       String
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
-    channel_id String
+    channel_id String   @db.Uuid
 
     channel Channel   @relation(fields: [channel_id], references: [id])
     message Message[]
@@ -57,9 +58,9 @@ model Product {
 }
 
 model Message {
-    id         String   @id @default(uuid())
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     user_id    String
-    product_id String
+    product_id String   @db.Uuid
     text       String
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt

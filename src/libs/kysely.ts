@@ -1,12 +1,9 @@
 import { Pool } from "pg";
 import { Kysely, PostgresDialect } from "kysely";
-import { DB } from "kysely-codegen";
 import { Context } from "hono";
 import { BlankInput } from "hono/types";
-
-type Bindings = {
-	DATABASE_URL: string;
-};
+import { Bindings } from "../type";
+import { DB } from "../db/types";
 
 export const db = (
 	c: Context<
@@ -27,7 +24,7 @@ export const db = (
 	return new Kysely<DB>({
 		dialect,
 		log: (event) => {
-			if (event.level === "query") {
+			if (event.level === "query" && c.env.DEVELOPMENT === "true") {
 				console.log(event.query.sql);
 				console.log(event.query.parameters);
 			}
